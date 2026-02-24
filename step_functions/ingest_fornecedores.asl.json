@@ -1,0 +1,34 @@
+{
+  "Comment": "Pipeline fornecedores - Lambda unica chamada + Glue",
+  "StartAt": "ExtrairDados",
+  "States": {
+
+    "ExtrairDados": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${lambda_arn}",
+        "Payload": {}
+      },
+      "ResultSelector": {
+        "result.$": "$.Payload"
+      },
+      "ResultPath": "$.result",
+      "Next": "TransformarDadosGlue"
+    },
+
+    "TransformarDadosGlue": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::glue:startJobRun.sync",
+      "Parameters": {
+        "JobName": "${glue_job_name}",
+        "Arguments": {
+          "--bucket": "${bucket_name}",
+          "--dt_extracao.$": "$.result.result.dt_extracao"
+        }
+      },
+      "End": true
+    }
+
+  }
+}

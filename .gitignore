@@ -4,6 +4,13 @@
 *.tfstate.*
 terraform.tfstate
 terraform.tfstate.backup
+*.tfstate
+*.tfstate.*
+*.zip
+infra/terraform.tfvars
+*.tfvars
+
+
 
 # Python
 __pycache__/
