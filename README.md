@@ -31,6 +31,7 @@ EventBridge
 
 ## Estrutura do Projeto
 
+```
 gov-shop-data-platform/
 │
 ├── infra/ # Terraform root
@@ -47,6 +48,7 @@ gov-shop-data-platform/
 │
 ├── layers/
 └── README.md
+```
 
 
 Infra totalmente modularizada para permitir expansão futura e multi-environment.
